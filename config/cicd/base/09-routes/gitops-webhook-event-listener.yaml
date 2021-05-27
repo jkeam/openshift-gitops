@@ -6,7 +6,7 @@ metadata:
   namespace: cicd
 spec:
   port:
-    targetPort: 8080
+    targetPort: 8000
   to:
     kind: Service
     name: el-cicd-event-listener

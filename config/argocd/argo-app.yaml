@@ -36,7 +36,7 @@ spec:
   project: default
   source:
     path: config/argocd
-    repoURL: https://github.com/ishitasequeira/gitops123.git
+    repoURL: https://github.com/ishitasequeira/gitops.git
   syncPolicy:
     automated:
       prune: true

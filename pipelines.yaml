@@ -25,5 +25,5 @@ environments:
       - github-push-binding
       template: app-ci-template
 - name: stage
-gitops_url: https://github.com/ishitasequeira/gitops123.git
+gitops_url: https://github.com/ishitasequeira/gitops.git
 version: 1
