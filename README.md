@@ -1,0 +1,2 @@
+# gitops
+Bootstrapped GitOps Repository
