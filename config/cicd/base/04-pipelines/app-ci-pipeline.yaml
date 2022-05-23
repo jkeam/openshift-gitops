@@ -42,11 +42,6 @@ spec:
     type: string
   - name: GIT_REPO
     type: string
-  resources:
-  - name: source-repo
-    type: git
-  - name: runtime-image
-    type: image
   tasks:
   - name: set-pending-status
     params:
@@ -77,16 +72,6 @@ spec:
     workspaces:
     - name: output
       workspace: shared-data
-  - name: go-ci
-    resources:
-      inputs:
-      - name: source
-        resource: source-repo
-    runAfter:
-    - clone-source
-    taskRef:
-      kind: Task
-      name: go-test
   - name: build-image
     params:
     - name: TLSVERIFY
@@ -98,7 +83,7 @@ spec:
     - name: IMAGE
       value: $(params.IMAGE)
     runAfter:
-    - go-ci
+    - clone-source
     taskRef:
       kind: ClusterTask
       name: buildah
