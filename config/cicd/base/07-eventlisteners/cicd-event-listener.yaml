@@ -22,7 +22,7 @@ spec:
     - params:
       - name: filter
         value: (header.match('X-GitHub-Event', 'push') && body.repository.full_name
-          == 'ishitasequeira/gitops')
+          == 'jkeam/openshift-gitops')
       - name: overlays
         value:
         - expression: body.ref.split('/')[2]
@@ -33,27 +33,27 @@ spec:
     template:
       ref: ci-dryrun-from-push-template
   - bindings:
-    - ref: dev-app-taxi-taxi-binding
+    - ref: dev-app-openshift-taxi-openshift-taxi-binding
     - ref: github-push-binding
     interceptors:
     - params:
       - name: secretRef
         value:
           secretKey: webhook-secret-key
-          secretName: webhook-secret-dev-taxi
+          secretName: webhook-secret-dev-openshift-taxi
       ref:
         name: github
     - params:
       - name: filter
         value: (header.match('X-GitHub-Event', 'push') && body.repository.full_name
-          == 'ishitasequeira/taxi')
+          == 'jkeam/openshift-taxi')
       - name: overlays
         value:
         - expression: body.ref.split('/')[2]
           key: ref
       ref:
         name: cel
-    name: app-ci-build-from-push-taxi
+    name: app-ci-build-from-push-openshift-taxi
     template:
       ref: app-ci-template
   - bindings:
@@ -70,7 +70,7 @@ spec:
     - params:
       - name: filter
         value: (header.match('X-GitHub-Event', 'push') && body.repository.full_name
-          == 'ishitasequeira/frontend-service')
+          == 'jkeam/openshift-frontend-service')
       - name: overlays
         value:
         - expression: body.ref.split('/')[2]
@@ -78,6 +78,30 @@ spec:
       ref:
         name: cel
     name: app-ci-build-from-push-frontend-service
+    template:
+      ref: app-ci-template
+  - bindings:
+    - ref: stage-full-stack-backend-service-binding
+    - ref: github-push-binding
+    interceptors:
+    - params:
+      - name: secretRef
+        value:
+          secretKey: webhook-secret-key
+          secretName: webhook-secret-stage-backend-service
+      ref:
+        name: github
+    - params:
+      - name: filter
+        value: (header.match('X-GitHub-Event', 'push') && body.repository.full_name
+          == 'jkeam/openshift-backend-service')
+      - name: overlays
+        value:
+        - expression: body.ref.split('/')[2]
+          key: ref
+      ref:
+        name: cel
+    name: app-ci-build-from-push-backend-service
     template:
       ref: app-ci-template
 status:

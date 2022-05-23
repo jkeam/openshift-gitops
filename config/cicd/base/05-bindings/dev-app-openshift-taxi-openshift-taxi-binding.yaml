@@ -2,12 +2,12 @@ apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerBinding
 metadata:
   creationTimestamp: null
-  name: stage-full-stack-frontend-service-binding
+  name: dev-app-openshift-taxi-openshift-taxi-binding
   namespace: cicd
 spec:
   params:
   - name: imageRepo
-    value: quay.io/jkeam/openshift-frontend-service
+    value: quay.io/jkeam/openshift-gitops
   - name: tlsVerify
     value: "true"
 status: {}

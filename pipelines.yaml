@@ -5,18 +5,18 @@ config:
     name: cicd
 environments:
 - apps:
-  - name: app-taxi
+  - name: app-openshift-taxi
     services:
-    - name: taxi
+    - name: openshift-taxi
       pipelines:
         integration:
           bindings:
-          - dev-app-taxi-taxi-binding
+          - dev-app-openshift-taxi-openshift-taxi-binding
           - github-push-binding
-      source_url: https://github.com/ishitasequeira/taxi.git
+      source_url: https://github.com/jkeam/openshift-taxi.git
       webhook:
         secret:
-          name: webhook-secret-dev-taxi
+          name: webhook-secret-dev-openshift-taxi
           namespace: cicd
   name: dev
   pipelines:
@@ -33,10 +33,21 @@ environments:
           bindings:
           - stage-full-stack-frontend-service-binding
           - github-push-binding
-      source_url: https://github.com/ishitasequeira/frontend-service.git
+      source_url: https://github.com/jkeam/openshift-frontend-service.git
       webhook:
         secret:
           name: webhook-secret-stage-frontend-service
+          namespace: cicd
+    - name: backend-service
+      pipelines:
+        integration:
+          bindings:
+          - stage-full-stack-backend-service-binding
+          - github-push-binding
+      source_url: https://github.com/jkeam/openshift-backend-service.git
+      webhook:
+        secret:
+          name: webhook-secret-stage-backend-service
           namespace: cicd
   name: stage
   pipelines:
@@ -44,5 +55,5 @@ environments:
       bindings:
       - github-push-binding
       template: app-ci-template
-gitops_url: https://github.com/ishitasequeira/gitops.git
+gitops_url: https://github.com/jkeam/openshift-gitops.git
 version: 1

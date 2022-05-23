@@ -3,28 +3,28 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app.kubernetes.io/name: frontend-service
+    app.kubernetes.io/name: backend-service
     app.kubernetes.io/part-of: full-stack
-  name: frontend-service
+  name: backend-service
   namespace: stage
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: frontend-service
+      app.kubernetes.io/name: backend-service
       app.kubernetes.io/part-of: full-stack
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app.kubernetes.io/name: frontend-service
+        app.kubernetes.io/name: backend-service
         app.kubernetes.io/part-of: full-stack
     spec:
       containers:
       - image: nginxinc/nginx-unprivileged:latest
         imagePullPolicy: Always
-        name: frontend-service
+        name: backend-service
         ports:
         - containerPort: 8080
         resources: {}

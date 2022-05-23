@@ -2,13 +2,13 @@ apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
   creationTimestamp: null
-  name: frontend-service
-  namespace: stage
+  name: openshift-taxi
+  namespace: dev
 spec:
   port:
     targetPort: http
   to:
     kind: Service
-    name: frontend-service
+    name: openshift-taxi
     weight: 100
   wildcardPolicy: None
